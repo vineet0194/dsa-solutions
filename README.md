@@ -2,7 +2,7 @@
 
 A curated collection of my Data Structures and Algorithms (DSA) solutions implemented in C++.
 
-This repository serves as a personal archive of problems solved across various topics including Arrays, Recursion, Trees, Graphs, Dynamic Programming, and more. The goal is to strengthen problem-solving skills, improve algorithmic thinking, and prepare for technical interviews.
+The repository is primarily structured around **[Striver's A2Z DSA Sheet](https://takeuforward.org/dsa/strivers-a2z-sheet-learn-dsa-a-to-z/)** and serves as a personal archive of problems solved across various topics including Arrays, Recursion, Trees, Graphs, Dynamic Programming, and more. The goal is to strengthen problem-solving skills, improve algorithmic thinking, and prepare for technical interviews.
 
 ## Repository Structure
 

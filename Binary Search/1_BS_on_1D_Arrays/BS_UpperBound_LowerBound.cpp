@@ -1,6 +1,7 @@
 /*
 Problem: Upper Bound and Lower Bound in Binary Search
-Link: NA
+Link:   https://takeuforward.org/arrays/implement-upper-bound
+        https://takeuforward.org/arrays/implement-lower-bound-bs-2
 Difficulty: Easy
 Approach: Binary Search
 Time Complexity: O(logn)

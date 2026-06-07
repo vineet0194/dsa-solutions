@@ -11,7 +11,9 @@ Note:
         [4 5 6 7 0 1 2] or [0 1 2 4 5 6 7]
         can clearly see that if nums[mid] > nums[h] for the first iteration, then the array is def rotated
         and the minimum must lie on the right side of mid, => l = mid+1;
-        if nums[mid] < nums[h] => array is not rotated and the minimum must lie on the left
+        if nums[mid] < nums[h] => the minimum must lie on the left, therefore h = mid.
+        h = mid is important and not h = mid-1, as mid can still be an answer, ex: [3 1 2] where nums[mid] = 1,
+        nums[mid] = 1 < nums[mid] = 2. so 1 can still be the answer, for next iteration => h = mid
 */
 
 class Solution {
@@ -20,8 +22,8 @@ public:
         int l=0, h=nums.size()-1, mid;
         while (l<=h){
             mid = l+(h-l)/2;
-            if (nums[mid] < nums[h]){
-                h = mid-1;
+            if (nums[mid] <= nums[h]){
+                h = mid;
             }
             else
                 l = mid+1;

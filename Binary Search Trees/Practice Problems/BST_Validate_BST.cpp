@@ -3,7 +3,8 @@ Problem: 98. Validate Binary Search Tree
 Link: https://leetcode.com/problems/validate-binary-search-tree/description/
 Difficulty: Medium
 Approach: DFS + BS
-Time Complexity: O(nlogn)
+Time Complexity: O(nlogn) for my solution
+                 O(n) for optimal solution
 Note:
     return (leftMax < root->val && isValidBST(root->left));
     return (root->val < rightMin && isValidBST(root->right));

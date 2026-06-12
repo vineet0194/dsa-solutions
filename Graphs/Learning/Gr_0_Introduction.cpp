@@ -91,3 +91,36 @@ int main(){
 
     return 0;
 }
+
+/*
+
+========================================
+          CONNECTED COMPONENTS
+========================================
+
+Definition:
+A connected component is a group of vertices such that every vertex
+is reachable from every other vertex in that group.
+
+Algorithm:
+1. Maintain a visited array.
+2. Iterate through all vertices.
+3. If a vertex is unvisited:
+    - Run BFS/DFS from it.
+    - Mark all reachable vertices as visited.
+    - Increment component count.
+4. Return component count.
+
+TC:
+Adjacency Matrix:
+    O(V^2)
+    (For every visited node, all V neighbors are checked.)
+
+Adjacency List:
+    O(V+E)
+
+Observation:
+The count of connected components is simply the number of times
+we initiate BFS/DFS from an unvisited node.
+
+*/

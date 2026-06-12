@@ -124,3 +124,42 @@ The count of connected components is simply the number of times
 we initiate BFS/DFS from an unvisited node.
 
 */
+
+/*
+
+How to identify a graph question if you have a grid
+
+A trick that helped many people
+
+!   cell = node
+!   movement rule = edge
+
+    Whenever you see a grid problem ask:    What is a node?
+        Usually:    a cell
+
+    Then ask:   When are two nodes connected?
+        Usually:    up/down/left/right  or  8 directions
+
+Then you've converted the grid into a graph.
+
+Suppose you have (foreg: Rotten Oranges)
+
+    2 1 1
+    1 1 0
+    0 1 1
+
+You see a matrix.
+
+A graph person sees:
+
+(0,0) -- (0,1) -- (0,2)
+  |        |        |
+(1,0) -- (1,1)    [wall]
+           |
+         (2,1) -- (2,2)
+
+Every cell becomes a node.
+
+Connections are determined by movement rules:   up/down/left/right
+
+*/

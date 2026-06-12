@@ -13,6 +13,19 @@ Note:
             if right half then check whether target lies in that range [mid, right]
                 if yes   => go right
                 else     => go left
+    
+    Duplicates can hide the rotation point, so sometimes you cannot determine which half is sorted.
+    The trick
+        If all three are equal:
+
+        nums[l] == nums[mid] && nums[mid] == nums[h]
+
+        we simply throw away the duplicates at the ends:
+
+        l++;
+        h--;
+
+        Now the ambiguity is gone, and we can continue the normal binary search logic.
 */
 
 class Solution {
@@ -23,6 +36,10 @@ public:
             int mid = l+(h-l)/2;
             if (target == nums[mid]){
                 return true;
+            }
+            if (nums[l] == nums[mid] && nums[mid] == nums[h]){
+                l++;
+                h--;
             }
             // left part is sorted
             else if (nums[l] <= nums[mid]){

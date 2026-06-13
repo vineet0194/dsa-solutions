@@ -124,7 +124,7 @@ The count of connected components is simply the number of times
 we initiate BFS/DFS from an unvisited node.
 
 */
-
+// ----------------------------------------------------------------------------------------------------------------- //
 /*
 
 How to identify a graph question if you have a grid
@@ -161,5 +161,115 @@ A graph person sees:
 Every cell becomes a node.
 
 Connections are determined by movement rules:   up/down/left/right
+
+*/
+
+// ----------------------------------------------------------------------------------------------------------------- //
+
+/*
+
+    ===============================================================================
+GRAPH REPRESENTATION : ADJACENCY LIST vs ADJACENCY MATRIX
+===============================================================================
+
+1. ADJACENCY MATRIX
+-------------------
+
+vector<vector<int>> matrix(V, vector<int>(V, 0));
+
+Example:
+
+0 --- 1
+|     |
+2 --- 3
+
+Matrix:
+
+    0 1 2 3
+0 [ 0 1 1 0 ]
+1 [ 1 0 0 1 ]
+2 [ 1 0 0 1 ]
+3 [ 0 1 1 0 ]
+
+Advantages:
+- O(1) edge lookup
+    matrix[u][v]
+
+- Easy to implement
+
+Disadvantages:
+- Space: O(V²)
+- DFS/BFS scans entire row even if only a few neighbors exist
+
+Example:
+V = 100000
+
+Space needed:
+100000² = 10^10 entries  ❌
+
+When to use:
+- Dense graphs
+- Small V
+- Frequent "is there an edge between u and v?" queries
+
+
+===============================================================================
+
+2. ADJACENCY LIST
+-----------------
+
+vector<vector<int>> adj(V);
+
+adj[u].push_back(v);
+
+Example:
+
+0 --- 1
+|     |
+2 --- 3
+
+Adjacency List:
+
+0 -> {1,2}
+1 -> {0,3}
+2 -> {0,3}
+3 -> {1,2}
+
+Advantages:
+- Space: O(V + E)
+- DFS/BFS only visits actual neighbors
+- Standard representation for interview questions
+
+Disadvantages:
+- Edge lookup is not O(1)
+
+Checking if edge (u,v) exists:
+Need to search adj[u]
+
+When to use:
+- Almost every graph problem
+- BFS
+- DFS
+- Cycle Detection
+- Bipartite Graph
+- Topological Sort
+- Dijkstra
+- Prim's
+- Most LeetCode / GFG graph questions
+
+
+===============================================================================
+
+COMPLEXITY COMPARISON
+-------------------------------------------------------------------------------
+
+Adjacency Matrix:
+Space       : O(V²)
+DFS / BFS   : O(V²)
+
+Adjacency List:
+Space       : O(V + E)
+DFS / BFS   : O(V + E)
+
 
 */

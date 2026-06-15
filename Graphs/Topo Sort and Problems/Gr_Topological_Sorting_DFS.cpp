@@ -1,5 +1,5 @@
 /*
-Problem: Topological Sort
+Problem: Topological Sort DFS
 Link: https://www.geeksforgeeks.org/problems/topological-sort/1
 Difficulty: Medium
 Approach: DFS (topological sorting)

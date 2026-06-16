@@ -13,6 +13,9 @@ Note:
                 this node will either have dependants of its own (then this node should be pushed first (so that last out))
                 or this node will be an independent node => can be pushed first (we will but does not matter => will depend on what
                 order are you calling your dfs functions in, be default we follow an index sorted order (0 to n) through visited array) 
+    
+    ! The DFS itself guarantees that by the time a node is pushed into the stack,
+    ! all of its dependencies (reachable descendants) have already been processed.
 
     if you need the order (only result) => maintain a stack     !!
     if you do not need the order => utilise callstack           !!
@@ -94,6 +97,24 @@ class Solution {
             if (!visited[i])
                 dfs(i, neighbours, visited, st);
         }
+
+        /*
+            The visited array does NOT represent whether a node has remaining dependencies or whether it is "ready" to be processed.
+            Instead, it simply means:
+                -> this node has already been discovered and fully explored in some previous DFS call.
+
+            So when we check:
+            if (!visited[i]) dfs(i);
+                It does NOT mean:
+                            -> "i has no unmet dependencies"
+
+                It means:
+                            -> "i has not been reached by any previous DFS traversal"
+
+            Key intuition:
+                visited[i] == false  ⇒  node i is in no previous DFS tree yet
+                so it becomes the ROOT of a new DFS tree
+        */
         
         while (!st.empty()){
             ans.push_back(st.top());

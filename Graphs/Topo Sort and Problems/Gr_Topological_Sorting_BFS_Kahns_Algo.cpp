@@ -5,7 +5,16 @@ Difficulty: Medium
 Approach: BFS (topological sorting)
 Time Complexity: O(V+E)
 Note:
-    need to update
+    first, calc indegree for all nodes, if a node has indegree 0 => we can start from here (as it has no dependencies)
+    => push that node into the queue and call bfs
+
+    as we iterate in bfs, pick a node (front) as curr, pop and get into ans and for all its children, do indegree -= 1
+    if at any point we encounter a neighbour with indegree which has become = 0 (after decrement)
+    then push that node into the queue and repeat the process.
+
+    at the end, if ans.size() != V => a cycle was detected because few nodes werent reachable
+    else
+        return res
 */
 
 class Solution {
@@ -26,8 +35,8 @@ class Solution {
             }
         }
     }
-
-    bool isCyclic(int V, vector<vector<int>> &edges) {
+    
+    vector<int> topoSort(int V, vector<vector<int>>& edges) {
         vector<vector<int>> neighbours(V, vector<int>{});
         vector<int> indegree(V,0);
         
@@ -45,6 +54,6 @@ class Solution {
         
         bfs(q, neighbours, indegree, res);
         
-        return !(res.size()==V);
+        return res;
     }
 };

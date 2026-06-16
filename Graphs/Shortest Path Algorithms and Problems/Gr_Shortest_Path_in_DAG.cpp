@@ -2,8 +2,8 @@
 Problem: Shortest path in Directed Acyclic Graph
 Link: https://www.geeksforgeeks.org/problems/shortest-path-in-undirected-graph/1
 Difficulty: Medium
-Approach: Queue based relation (BFS)
-Time Complexity: O(VE)
+Approach: Queue based relaxation (BFS)      ,       optimal approach: Topological Sorting
+Time Complexity: O(VE)      ,       optimal: O(2(V+E)) => O(V+E)
 Note:
     ! BFS guarantees shortest paths only in unweighted graphs because it explores nodes by the number of edges traversed, not by the
     ! total path weight. When edge weights differ, the path with fewer edges may not have the minimum cost.
@@ -66,6 +66,71 @@ For a weighted DAG, use Topological Sort + Edge Relaxation.
 Why it works?
     A DAG has no cycles, so we can arrange nodes in a topological order:
 
-When processing a node u, all possible paths that can reach u have already been considered. Therefore, dist[u] is final, and you can safely relax its outgoing edges.
+When processing a node u, all possible paths that can reach u have already been considered.
+Therefore, dist[u] is final, and you can safely relax its outgoing edges.
+
+:::::::::::::::::::::::::::::::::::::::::::::::
+             :: ALGORITHM STEPS ::
+
+1) do a topo sort on the graph
+2) take the nodes out of stack and 'relax' them
+
+:::::::::::::::::::::::::::::::::::::::::::::::
+
+!   if (currDist == -1)         // current node is unreachable => dont relax
+    continue;
+
+    how did an unreachable node reach into the stack?
+    becos we did dfsTopo for all non-visited node, it might have created its own dfs tree in the forest
+    (disconnected component)
 */
 
+class Solution {
+  public:
+    void dfsTopo(int src, vector<vector<pair<int, int>>>& neighbours, vector<bool>& visited, stack<int>& st){
+        visited[src] = 1;
+        for (auto& neigh : neighbours[src]){
+            int next = neigh.first;
+            if (!visited[next]){
+                dfsTopo(next, neighbours, visited, st);
+            }
+        }
+        st.push(src);
+    }
+    
+    vector<int> shortestPath(int V, int E, vector<vector<int>>& edges) {
+        vector<vector<pair<int,int>>> neighbours(V);
+        
+        for (int i=0; i<E; i++){
+            neighbours[edges[i][0]].push_back({edges[i][1], edges[i][2]});
+        }
+
+        vector<bool> visited(V, 0);
+        
+        stack<int> topoSt;
+        
+        for (int i=0; i<V; i++){
+            if (!visited[i])
+                dfsTopo(i, neighbours, visited, topoSt);
+        }
+        
+        vector<int> dist(V, -1);
+        dist[0] = 0;
+        
+        while (!topoSt.empty()){
+            int curr = topoSt.top();
+            int currDist = dist[curr];
+            topoSt.pop();
+            if (currDist == -1)         // current node is unreachable => dont relax
+                continue;
+            for (auto& neigh : neighbours[curr]){           // relaxation
+                int next = neigh.first;
+                int nextDist = currDist + neigh.second;
+                if (dist[next] == -1 || nextDist < dist[next])
+                    dist[next] = nextDist;
+            }
+        }
+        
+        return dist;
+    }
+};

@@ -1,6 +1,12 @@
 *.exe
 *.out
 a.out
+
 .vscode/
 tempCodeRunnerFile.cpp
 .temp
+
+.*
+!.gitignore
+!.gitattributes
+!.github/

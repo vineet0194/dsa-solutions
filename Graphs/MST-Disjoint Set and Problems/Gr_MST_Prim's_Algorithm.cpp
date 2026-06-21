@@ -3,8 +3,9 @@ Problem: MST using Prim's Algorithm
 Link: https://www.geeksforgeeks.org/problems/minimum-spanning-tree/1
 Difficulty: Medium
 Approach: Greedy BFS (Prim's Alrogithm)
-Time Complexity: 
+Time Complexity: O((V+E)logV)
 Note:
+    Preferred for dense graphs MST findings
     consider edges as a pair of {dist from u to v, v} and not (total weight of src->v) as we used to do earlier
 */
 

@@ -3,7 +3,7 @@ Problem: MST using Kruskal's Algorithm
 Link: https://www.geeksforgeeks.org/problems/minimum-spanning-tree-kruskals-algorithm/1
 Difficulty: Medium
 Approach: Greedy BFS (Kruskal's Algorithm)
-Time Complexity: 
+Time Complexity: O(ElogE)​
 Note:
     Preferred for sparse graphs MST findings
 
@@ -40,20 +40,20 @@ Note:
 class DisJointSetUnion{
 public:
     int n;
-    vector<int> par, rank;
+    vector<int> leader, rank;
     
     DisJointSetUnion(int n){
         for (int i=0; i<n; i++){
-            par.push_back(i);
+            leader.push_back(i);
             rank.push_back(0);
         }
     }
     
     int findLeader(int x){
-        if (par[x] == x)
+        if (leader[x] == x)
             return x;
-        int leader = findLeader(par[x]);
-        par[x] = leader;
+        int leader = findLeader(leader[x]);
+        leader[x] = leader;
         return leader;
     }
     
@@ -65,15 +65,15 @@ public:
             return;
         
         if (rank[leaderOfU] == rank[leaderOfV]){
-            par[leaderOfV] = leaderOfU;
+            leader[leaderOfV] = leaderOfU;
             rank[leaderOfU]++;
         }
         else if (rank[leaderOfU] > rank[leaderOfV]){
-            par[leaderOfV] = leaderOfU;
+            leader[leaderOfV] = leaderOfU;
             rank[leaderOfU]++;
         }
         else{
-            par[leaderOfU] = leaderOfV;
+            leader[leaderOfU] = leaderOfV;
             rank[leaderOfV]++;
         }
     }
@@ -89,7 +89,10 @@ public:
             int leaderOfU = findLeader(edge[0]);
             int leaderOfV = findLeader(edge[1]);
             
-            if (leaderOfU != leaderOfV){ // only consider if both are not in the same group
+            // ! if both leaders are same => same group => will form cycle => DONT TAKE EDGE !
+            // if not same :
+            if (leaderOfU != leaderOfV){    
+                // picking an edge = doing union of 2 vertices => consider that edge weight in MST cost
                 doUnionByRank(edge[0], edge[1]);
                 cost += wt;
             }

@@ -2,7 +2,7 @@
 Problem: 3699. Number of ZigZag Arrays I
 Link: https://leetcode.com/problems/number-of-zigzag-arrays-i/description/?envType=daily-question&envId=2026-06-23
 Difficulty: Hard
-Approach: 
+Approach: DP
 Time Complexity: O(n*m), m=r−l+1, m=>num of distinct values
 Note:
     

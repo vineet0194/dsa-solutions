@@ -3,7 +3,7 @@ Problem: 1192. Critical Connections in a Network
 Link: https://leetcode.com/problems/critical-connections-in-a-network/
 Difficulty: Hard
 Approach: Tarjan's Algo
-Time Complexity: O(E)
+Time Complexity: O(V+E)
 Note:
     for this algo, maintain a few things:
         1. a global time variable which updates before each node
@@ -50,7 +50,7 @@ class Solution {
 public:
     int time=0;
     vector<int> dt, low;
-    void dfs(int u, int par, vector<vector<int>>& neighbours, vector<bool>& visited, vector<vector<int>>& ans){
+    void implementTarjan(int u, int par, vector<vector<int>>& neighbours, vector<bool>& visited, vector<vector<int>>& ans){
         visited[u] = 1;
         dt[u] = low[u] = ++time;
         for (auto& v : neighbours[u]){
@@ -85,7 +85,7 @@ public:
         dt.resize(n);
         low.resize(n);
 
-        dfs(0, -1, neighbours, visited, ans);
+        implementTarjan(0, -1, neighbours, visited, ans);
 
         return ans;
     }

@@ -9,4 +9,5 @@ tempCodeRunnerFile.cpp
 .*
 !.gitignore
 !.gitattributes
+!.gitkeep
 !.github/

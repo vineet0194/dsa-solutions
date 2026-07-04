@@ -1,9 +1,9 @@
 /*
-Problem: 
-Link: 
-Difficulty: 
-Approach: 
-Time Complexity: O(n)
+Problem: 62. Unique Paths
+Link: https://leetcode.com/problems/unique-paths/description/
+Difficulty: Medium
+Approach: DP
+Time Complexity: O(m*n)
 Note:
     
 */

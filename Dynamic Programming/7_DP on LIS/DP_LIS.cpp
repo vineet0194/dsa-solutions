@@ -31,7 +31,7 @@ public:
 
     int lengthOfLIS(vector<int>& nums) {
         this->n = nums.size();
-        vector<vector<int>> dp(n, vector<int>(n+1, 0));
+        vector<vector<int>> dp(n, vector<int>(n+1, -1));
         return solve(0, -1, nums, dp);
     }
 };
@@ -95,5 +95,37 @@ public:
         }
 
         return prev[0];    // prev[-1] is stored in prev[0]
+    }
+};
+
+/* ------------------------------------------------------------------------------------------- */
+
+// ! Bottom Up DP Tabulation Another Method, TC: O(n^2), SC: O(n)
+// t[i] => max LIS ending at i
+// Explanation: https://leetcode.com/problems/longest-increasing-subsequence/solutions/8402245/classic-dp-longest-increasing-subsequenc-tobx
+
+// ! THIS IS THE NATURAL/EASIER/PREFERRED WAY FOR LIS BASED DP QUESTIONS ===> LEARN IT!
+
+class Solution {
+public:
+    int lengthOfLIS(vector<int>& nums) {
+        int n = nums.size();
+        vector<int> t(n, 1);
+
+        for (int i=0; i<n; i++){
+            for (int j=0; j<i; j++){
+                if (nums[j] < nums[i]){
+                    t[i] = max(t[i], 1+t[j]);
+                }
+            }
+        }
+
+        int maxi = t[0];
+        for (int i=0; i<n; i++){
+            if (maxi < t[i])
+                maxi = t[i];
+        }
+
+        return maxi;
     }
 };

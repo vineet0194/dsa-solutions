@@ -34,7 +34,7 @@ public:
     }
 };
 
-// OPTIMAL: O(3n)
+// OPTIMAL, MAX ARRAY: O(3n)
 
 class Solution {
 public:
@@ -56,6 +56,34 @@ public:
         int ans = 0;
         for (int i=0; i<n; i++){
             ans += min(leftMax[i], rightMax[i]) - height[i];
+        }
+
+        return ans;
+    }
+};
+
+// ANOTHER OPTIMAL, 2P Approach: O(n)
+
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        int n = height.size();
+
+        int leftMax = -1, rightMax = -1, l = 0, r = n-1;
+
+        int ans = 0;
+        for (int i=0; i<n; i++){
+            leftMax = max(leftMax, height[l]);
+            rightMax = max(rightMax, height[r]);
+
+            if (leftMax < rightMax){
+                ans += leftMax - height[i];
+                l++;
+            }
+            else{
+                ans += rightMax - height[i];
+                r--;
+            }
         }
 
         return ans;

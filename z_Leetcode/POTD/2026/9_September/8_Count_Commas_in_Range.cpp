@@ -1,0 +1,22 @@
+/*
+Problem: 3870. Count Commas in Range
+Link: https://leetcode.com/problems/count-commas-in-range/?envType=daily-question&envId=2026-09-08
+Difficulty: Easy
+Approach: Logic
+Time Complexity: O(1)
+Note:
+    
+*/
+
+class Solution {
+public:
+    int countCommas(int n) {
+        if (n < 1000)
+            return 0;
+        
+        if (n <= 10000)
+            return n-1000+1;
+        
+        return n-1000+1;
+    }
+};
